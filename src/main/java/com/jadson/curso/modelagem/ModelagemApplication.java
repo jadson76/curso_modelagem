@@ -1,13 +1,8 @@
 package com.jadson.curso.modelagem;
 
-import com.jadson.curso.modelagem.domain.Categoria;
-import com.jadson.curso.modelagem.domain.Cidade;
-import com.jadson.curso.modelagem.domain.Estado;
-import com.jadson.curso.modelagem.domain.Produto;
-import com.jadson.curso.modelagem.repository.CategoriaRepository;
-import com.jadson.curso.modelagem.repository.CidadeRepository;
-import com.jadson.curso.modelagem.repository.EstadoRepository;
-import com.jadson.curso.modelagem.repository.ProdutoRepository;
+import com.jadson.curso.modelagem.domain.*;
+import com.jadson.curso.modelagem.domain.enums.TipoCliente;
+import com.jadson.curso.modelagem.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -26,6 +21,10 @@ public class ModelagemApplication implements CommandLineRunner {
 	private CidadeRepository cidadeRepository;
 	@Autowired
 	private EstadoRepository estadoRepository;
+	@Autowired
+	private ClienteRepository clienteRepository;
+	@Autowired
+	private EnderecoRepository enderecoRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ModelagemApplication.class, args);
@@ -58,12 +57,30 @@ public class ModelagemApplication implements CommandLineRunner {
 		est1.getCidades().addAll(Arrays.asList(c1));
 		est2.getCidades().addAll(Arrays.asList(c2,c3));
 
+		Cliente cli1 = new Cliente(null, "Rafael Mendes","rafael@gmail.com","07407411201",TipoCliente.PESSOA_FISICA);
+		cli1.getTelefones().addAll(Arrays.asList("2233-4422","98120-2545"));
+
+		Endereco e1 = new Endereco(null,"rua flores","100","casa 4","Uberlandia","25220111",cli1,c1);
+		Endereco e2 = new Endereco(null,"Avenida Mattos","13","apt 420","Centro","50212540",cli1,c2);
+
+		cli1.getEnderecos().addAll(Arrays.asList(e1,e2));
+
+
+		Cliente cli2 = new Cliente(null, "Maria Mendes","maria@gmail.com","07407411201",TipoCliente.PESSOA_FISICA);
+		cli2.getTelefones().addAll(Arrays.asList("2233-4422","98425-2541"));
+
+		Endereco e3 = new Endereco(null,"Rua das Acacias","10","apt 101","Maria Madelana","50212540",cli2,c2);
+		cli2.getEnderecos().addAll(Arrays.asList(e3));
+
 
 		categoriaRepository.saveAll(Arrays.asList(cat1,cat2));
 		produtoRepository.saveAll(Arrays.asList(p1,p2,p3));
 
 		estadoRepository.saveAll(Arrays.asList(est1,est2));
 		cidadeRepository.saveAll(Arrays.asList(c1,c2,c3));
+
+		clienteRepository.saveAll(Arrays.asList(cli1,cli2));
+		enderecoRepository.saveAll(Arrays.asList(e1,e2,e3));
 
 	}
 }
