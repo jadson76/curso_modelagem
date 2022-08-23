@@ -1,5 +1,7 @@
 package com.jadson.curso.modelagem.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -44,6 +46,7 @@ public class Estado implements Serializable {
         this.nome = nome;
     }
 
+    @JsonIgnore
     public List<Cidade> getCidades() {
         return cidades;
     }

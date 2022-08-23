@@ -1,5 +1,7 @@
 package com.jadson.curso.modelagem.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -14,6 +16,7 @@ public class Cidade implements Serializable {
 
     private String nome;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name="estado_id")
     private Estado estado;
