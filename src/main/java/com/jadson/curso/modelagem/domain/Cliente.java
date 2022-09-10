@@ -1,6 +1,5 @@
 package com.jadson.curso.modelagem.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.jadson.curso.modelagem.domain.enums.TipoCliente;
 
@@ -27,6 +26,9 @@ public class Cliente implements Serializable {
     @ElementCollection
     @CollectionTable(name = "TELEFONE")
     private Set<String> telefones = new HashSet<>();
+
+    @OneToMany(mappedBy = "cliente")
+    private List<Pedido> pedidos = new ArrayList<>();
 
     public Cliente() {
     }
@@ -93,6 +95,18 @@ public class Cliente implements Serializable {
 
     public void setTelefones(Set<String> telefones) {
         this.telefones = telefones;
+    }
+
+    public void setTipo(Integer tipo) {
+        this.tipo = tipo;
+    }
+
+    public List<Pedido> getPedidos() {
+        return pedidos;
+    }
+
+    public void setPedidos(List<Pedido> pedidos) {
+        this.pedidos = pedidos;
     }
 
     @Override
