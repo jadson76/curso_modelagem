@@ -1,11 +1,15 @@
 package com.jadson.curso.modelagem.domain;
 
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
 import java.io.Serializable;
 import java.util.Objects;
 
+@Entity
 public class ItemPedido implements Serializable {
     private static final long serialVersionUID = 9140763240182049709L;
 
+    @EmbeddedId
     private ItemPedidoPK id = new ItemPedidoPK();
     private Double desconto;
     private Integer quantidade;
