@@ -1,5 +1,6 @@
 package com.jadson.curso.modelagem.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.jadson.curso.modelagem.domain.enums.EstadoPagamento;
 
 import javax.persistence.*;
@@ -16,6 +17,7 @@ public abstract class Pagamento implements Serializable {
 
     private Integer estado;
 
+    @JsonIgnore
     @OneToOne
     @JoinColumn(name = "pedido_id")
     @MapsId
